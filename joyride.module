@@ -1,6 +1,6 @@
 <?php
 
-define('JOYRIDE_LIBRARY_VERSION', '2.0.3');
+define('JOYRIDE_LIBRARY_VERSION', '2.1');
 
 /**
  * Implements hook_libraries_info().
@@ -45,14 +45,15 @@ function joyride_version($library, $options) {
     'lines' => 20,
     'cols' => 200,
   );
-
   $file = DRUPAL_ROOT . '/' . $library['library path'] . '/' . $options['file'];
+  dd($file, "The File: ");
   if (empty($options['file']) || !file_exists($file)) {
     return;
   }
   $file = fopen($file, 'r');
   while ($options['lines'] && $line = fgets($file, $options['cols'])) {
     if (preg_match($options['pattern'], $line, $version)) {
+      dd($version, "version: ");
       if ($version[1] == JOYRIDE_LIBRARY_VERSION) {
         fclose($file);
         return $version[1];

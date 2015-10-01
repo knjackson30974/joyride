@@ -20,7 +20,13 @@
         joyride_options.cookieMonster = false;
       } else joyride_options.cookieMonster = true;
 
+      var auto_start = Drupal.settings.joyrideContext.auto_start || 'undefined';
+      if(auto_start == 'true' || auto_start == true) {
+        joyride_options.autoStart = 1;
+      } else joyride_options.autoStart = false;
+
       $('ol#joyride-tips-content').joyride(joyride_options);
+
     }
   };
 }(jQuery));
